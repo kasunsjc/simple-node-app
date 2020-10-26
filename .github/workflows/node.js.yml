@@ -7,16 +7,16 @@ on:
 jobs:
   build:
     name: node-job
-    runs-on: ${{ metrix.os }}
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [windows-latest, ubuntu-latest]
         node: [10, 12, 14]
     steps:
       - uses: actions/checkout@2
-      - name: use node.js ${{ metrix.node }}
+      - name: use node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ metrix.node }}
+          node-version: ${{ matrix.node }}
       - run: npm ci
       - run: npm run build --if-present        
